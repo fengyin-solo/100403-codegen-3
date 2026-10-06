@@ -68,4 +68,5 @@ npm run build
 - 字段、状态、动作与流转目标集中在 `frontend/src/data/modules.ts`；示例数据在
   `frontend/src/data/seed.ts`。
 - 状态流转只允许在 `local-service.ts` 里改，页面组件不做业务判断。
+- 巡检任务按 待分配→已分配→执行中→已完成 逐级流转（模块元数据 `orderedFlow`），跳级、回退、完成后变更都会被拒绝；领取批次、异常上报（联动缺陷记录与管线覆盖标记）、责任变更留痕、取消释放的逻辑在 `frontend/src/api/inspection-service.ts`，执行台进度持久化在 localStorage，中断后重新进入自动恢复。
 - 想回到初始数据：清掉浏览器里 `underground-pipeline-inspection:entries` 这一项，或调用 `resetModule(模块)`。

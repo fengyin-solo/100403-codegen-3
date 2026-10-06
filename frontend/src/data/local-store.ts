@@ -40,8 +40,14 @@ export function listRows(key: string): EntryRow[] {
   return allRows()[key] ?? []
 }
 
+// 绕过内存缓存直接读 localStorage：领取、取消这类要防并发覆盖的操作必须看最新快照。
+export function readFreshRows(key: string): EntryRow[] {
+  return readStorage()[key] ?? []
+}
+
 export function saveRows(key: string, rows: EntryRow[]): void {
-  const next = { ...allRows(), [key]: rows }
+  // 基于最新快照合并再写回，别的标签页刚写进去的模块不会被这里的旧缓存冲掉。
+  const next = { ...readStorage(), [key]: rows }
   cache = next
   if (typeof window !== 'undefined' && window.localStorage) {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next))

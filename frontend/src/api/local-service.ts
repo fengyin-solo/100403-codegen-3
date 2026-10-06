@@ -43,6 +43,20 @@ export function runAction(key: string, id: number, action: string): ActionResult
   if (current === target) {
     return { ok: false, message: `${meta.entity}已经是「${target}」，不用重复操作` }
   }
+  if (meta.orderedFlow) {
+    const currentIndex = meta.statuses.indexOf(current)
+    const targetIndex = meta.statuses.indexOf(target)
+    if (targetIndex !== currentIndex + 1) {
+      const flowText = meta.statuses.join('→')
+      if (currentIndex === meta.statuses.length - 1) {
+        return { ok: false, message: `${meta.entity}已经「${current}」，流程已终结，不能再变更状态` }
+      }
+      if (targetIndex <= currentIndex) {
+        return { ok: false, message: `${meta.entity}不能从「${current}」回退到「${target}」，只能按 ${flowText} 顺序推进` }
+      }
+      return { ok: false, message: `${meta.entity}必须先从「${current}」推进到「${meta.statuses[currentIndex + 1]}」，不能跳级到「${target}」（顺序：${flowText}）` }
+    }
+  }
   const lastStatus = meta.statuses[meta.statuses.length - 1]
   const updated: EntryRow = {
     ...rows[index],
