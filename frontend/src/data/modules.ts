@@ -23,6 +23,7 @@ export const MODULES: ModuleMeta[] = [
     actions: ["分配任务", "开始巡检", "确认完成"],
     actionTargets: {"分配任务": "已分配", "开始巡检": "执行中", "确认完成": "已完成"},
     metrics: ["今日任务", "待分配任务", "已完成任务"],
+    sequential: true,
   },
   {
     key: "defect",

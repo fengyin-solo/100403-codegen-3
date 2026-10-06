@@ -35,3 +35,19 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .error-text { color: #b42318; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
 .legend-item { background: #eef2f7; border-radius: 999px; padding: 2px 10px; }
+.filter-item input, .filter-item select { padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
+.batch-board { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 16px; }
+.batch-board-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+.batch-board-head h3 { margin: 0 0 4px; font-size: 15px; }
+.batch-active { border: 1px solid var(--brand); border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; background: #f0f6ff; }
+.batch-active-head { display: flex; gap: 10px; align-items: baseline; margin-bottom: 6px; font-size: 13px; }
+.batch-active-meta { margin: 0 0 8px; font-size: 13px; color: var(--muted); }
+.batch-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 10px; }
+.batch-form h4 { width: 100%; margin: 0; font-size: 14px; }
+.batch-form .form-desc { width: 100%; margin: 0; }
+.batch-log { border-top: 1px dashed var(--border); margin-top: 10px; padding-top: 8px; font-size: 12px; color: var(--muted); }
+.batch-log h4 { margin: 0 0 6px; font-size: 13px; color: #1f2937; }
+.batch-log h5 { margin: 6px 0 4px; font-size: 12px; }
+.batch-log ul { margin: 0; padding-left: 18px; }
+.batch-notice { color: #067647; font-size: 13px; }
+.cancel-failure { display: flex; gap: 10px; align-items: center; margin: 8px 0 0; font-size: 13px; }

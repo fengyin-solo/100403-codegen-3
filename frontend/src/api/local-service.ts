@@ -43,6 +43,16 @@ export function runAction(key: string, id: number, action: string): ActionResult
   if (current === target) {
     return { ok: false, message: `${meta.entity}已经是「${target}」，不用重复操作` }
   }
+  if (meta.sequential) {
+    const from = meta.statuses.indexOf(current)
+    const to = meta.statuses.indexOf(target)
+    if (from >= 0 && to > from + 1) {
+      return { ok: false, message: `${meta.entity}必须依次经过${meta.statuses.join('、')}，不能从「${current}」跳到「${target}」` }
+    }
+    if (from >= 0 && to >= 0 && to < from) {
+      return { ok: false, message: `${meta.entity}必须按顺序推进，不能从「${current}」回到「${target}」` }
+    }
+  }
   const lastStatus = meta.statuses[meta.statuses.length - 1]
   const updated: EntryRow = {
     ...rows[index],
